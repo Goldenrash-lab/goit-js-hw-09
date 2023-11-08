@@ -13,7 +13,7 @@ const refs = {
 refs.startBtn.disabled = true;
 refs.startBtn.addEventListener('click', onStartBtnClick);
 
-let selectedDates1 = null;
+let pickDate = null;
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -21,7 +21,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     const nowDate = new Date();
-    selectedDates1 = selectedDates[0];
+    pickDate = selectedDates[0];
     if (selectedDates[0] <= nowDate) {
       Notify.failure('Please choose a date in the future');
     } else {
@@ -40,9 +40,9 @@ function addLeadingZero(value) {
 
 function onStartBtnClick(e) {
   e.target.disabled = true;
-  let intervalId = setInterval(() => {
+  setInterval(() => {
     const nowDate = new Date();
-    const diff = selectedDates1.getTime() - nowDate.getTime();
+    const diff = pickDate.getTime() - nowDate.getTime();
     if (diff < 0) {
       return;
     }
